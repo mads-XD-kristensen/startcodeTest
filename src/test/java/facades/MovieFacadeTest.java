@@ -88,6 +88,7 @@ public class MovieFacadeTest {
         );
     }
 
+    @Disabled
     @Test
     public void testGetMovieById() {
         Movie m1 = facade.getMovieById(1);
