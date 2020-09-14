@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+
+        <div id="list"></div>
+        <form action="">
+            <input type="text" id="name" name="name" placeholder="Skriv navn her ">
+            <input type="submit" id="tilføj" value="Tilføj">
+        </form>
+
+        <script>
+            var array = ["Peter", "Bo", "Mads"];
+            var name = document.getElementById("name").value;
+            var tilføj = document.getElementById("tilføj");
+
+            function html(arrayHere) {
+                var text = "<ul>";
+                var htmlList = arrayHere.map(n => '<li>' + n + "</li>");
+                return text + htmlList.join('') + "</ul>";
+            }
+
+            function tilføjNavn(e) {
+                e.preventDefault();
+                array.push(name);
+                document.getElementById("list").innerHTML = html(array);
+                console.log(array);
+            }
+
+            document.getElementById("list").innerHTML = html(array);
+            tilføj.addEventListener("click", tilføjNavn);
+            
+
+
+        </script>
+    </body>
+</html>

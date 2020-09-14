@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Torsdag opgave 2</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            div{width: 25px; height: 25px;background-color:yellow; margin:1px;}
+        </style>
+    </head>
+    <body>
+        <div id="outer">
+
+            <div id="id1">Div1</div>
+            <div id="id2">Div2</div>
+            <div id="id3">Div3</div>
+            <div id="id4">Div4</div>
+            <div id="id5">Div5</div>
+            <div id="id6">Div6</div>
+
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <p id="text"></p>
+        <script>
+            //var id1 = document.getElementById("id1");
+           //var id2 = document.getElementById("id2");
+
+            //id1.addEventListener("click", hiFrom);
+            //id2.addEventListener("click", hiFrom);
+
+            var idAll=document.getElementById("outer");
+            
+            idAll.addEventListener("click", function(event){
+                console.log("hi from " + event.target.innerText);
+                document.getElementById("text").innerHTML += event.target.innerText;
+            });
+
+            function hiFrom() {
+                console.log("hi from " + this.id);
+                document.getElementById("text").innerHTML = "hi from " + this.id;
+            }
+
+        </script>
+    </body>
+</html>

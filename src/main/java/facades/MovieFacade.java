@@ -4,13 +4,9 @@ import entities.Movie;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
+import javax.persistence.Query;
+import utils.EMF_Creator;
 
-/**
- *
- * Rename Class to a relevant name Add add relevant facade methods
- */
 public class MovieFacade {
 
     private static MovieFacade instance;
@@ -49,21 +45,63 @@ public class MovieFacade {
     }
 
     public List<Movie> getAllMovies() {
-        EntityManager em = getEntityManager();
+        EntityManager em = emf.createEntityManager();
         try {
-            TypedQuery<Movie> movieList = em.createQuery("SELECT m FROM Movie m", Movie.class);
-            return (List<Movie>) movieList;
+            Query query = em.createQuery("SELECT m FROM Movie m");
+            List<Movie> movieList = query.getResultList();
+            return movieList;
         } finally {
             em.close();
         }
     }
 
-    public void addMovie(String title, int year) {
-        EntityManager em = getEntityManager();
-        Movie m = new Movie(title, year);
+//    public void addMovie(int year, String title, String[] actors) {
+//        EntityManager em = emf.createEntityManager();
+//        Movie m = new Movie(year, title, actors);
+//        try {
+//            em.getTransaction().begin();
+//            em.persist(m);
+//            em.getTransaction().commit();
+//        } finally {
+//            em.close();
+//        }
+//    }
+
+    public Movie getMovieById(long id) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            Query query = em.createQuery("SELECT m FROM Movie m WHERE m.id = :id");
+            query.setParameter("id", id);
+            Movie movie = (Movie) query.getSingleResult();
+            return movie;
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Movie> getMovieByTitle(String title) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            Query query = em.createQuery("SELECT m FROM Movie m WHERE m.title LIKE CONCAT('%',:title,'%')");
+            query.setParameter("title", title);
+            List<Movie> movieList = query.getResultList();
+            return movieList;
+        } finally {
+            em.close();
+        }
+    }
+
+    public static void main(String[] args) {
+
+        EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
+
+        EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.persist(m);
+            em.createQuery("DELETE from Movie").executeUpdate();
+            em.persist(new Movie(2003, "Kung fu panda", new String[]{"Jack black", "Angelina Jolie"}));
+            em.persist(new Movie(2006, "Kung fu panda 2", new String[]{"Jack black", "Angelina Jolie"}));
+            em.persist(new Movie(2009, "Kung fu panda 3", new String[]{"Jack black", "Angelina Jolie"}));
             em.getTransaction().commit();
         } finally {
             em.close();

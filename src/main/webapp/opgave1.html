@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Torsdag opgave 1</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    </head>
+    <body>
+        <div id="d1">Div 1</div>
+        <div id="d2">Div 2</div>
+        <div id="d3">Div 3</div>
+
+        <button type="button" id="btn">Klik her</button>
+
+        <script>
+
+            var loadColor = document.getElementsByTagName("div");
+
+            for (var i = 0; i < loadColor.length; i++) {
+                window.onload = loadColor[i].style.backgroundColor = "red";
+            }
+
+            function changeColor() {
+                document.getElementById("d1").style.backgroundColor = "orange";
+                document.getElementById("d2").style.backgroundColor = "green";
+                document.getElementById("d3").style.backgroundColor = "purple";
+            }
+
+            var btn = document.getElementById("btn");
+            btn.addEventListener("click", changeColor);
+
+        </script>
+
+    </body>
+</html>
