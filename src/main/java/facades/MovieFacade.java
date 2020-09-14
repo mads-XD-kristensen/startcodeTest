@@ -100,7 +100,7 @@ public class MovieFacade {
             em.getTransaction().begin();
             em.createQuery("DELETE from Movie").executeUpdate();
             em.persist(new Movie(2003, "Kung fu panda", new String[]{"Jack black", "Angelina Jolie"}));
-            em.persist(new Movie(2006, "Kung fu panda 2", new String[]{"Jack black", "Angelina Jolie"}));
+            em.persist(new Movie(2006, "Kung fu panda 2", new String[]{"Jack black", "Jackie Chan"}));
             em.persist(new Movie(2009, "Kung fu panda 3", new String[]{"Jack black", "Angelina Jolie"}));
             em.getTransaction().commit();
         } finally {
